@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7AC4E0D5-5BBA-4ED9-9D9A-95DF5A59D8B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Application.Host", "Bank.Application.Host\Bank.Application.Host.csproj", "{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD} = {7AC4E0D5-5BBA-4ED9-9D9A-95DF5A59D8B5}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7BA566-22EF-4B95-A6EF-DFFB0CFDB4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
