@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Abstractions\Cards" />
+      <Folder Include="Abstractions\Loans" />
+      <Folder Include="Cards" />
+      <Folder Include="Loans" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Bank.Application.Api\Bank.Application.Api.csproj" />
+      <ProjectReference Include="..\Bank.Application.DataAccess\Bank.Application.DataAccess.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
+    </ItemGroup>
+
+</Project>

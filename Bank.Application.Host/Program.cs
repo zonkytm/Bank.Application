@@ -1,26 +1,66 @@
+using System.Text;
+using Bank.Application.AppServices.ApiClient;
+using Bank.Application.Host;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+builder.Services.AddRazorPages();
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .Build();
+builder.Services.Configure<ApiClientSettings>(configuration.GetSection("ApiClientSettings"));
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ApiClient>();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var issuer = jwtSettings["Issuer"];
+var audience = jwtSettings["Audience"];
+var secretKey = jwtSettings["SecretKey"];
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set your preferred timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddAuthentication("Bearer")  // схема аутентификации - с помощью jwt-токенов
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = false,
+            ValidIssuer = issuer,
+            ValidAudience = audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+        };
+    });    
+builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseRouting();
-app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseAuthorization();
-
-app.MapControllers();
-
+app.UseSession();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllers();
+});
 app.Run();

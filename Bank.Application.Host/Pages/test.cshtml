@@ -1,0 +1,22 @@
+﻿@page
+@model Bank.Application.Host.Pages.test
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+}
+
+@{
+    var isAuthenticated = HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+    var accessToken = HttpContextAccessor.HttpContext.Session.GetString("AccessToken");
+}
+
+@if (!isAuthenticated)
+{
+    <text>Not authenticated. Please log in.</text>
+    <text>Authenticated. Access token: @accessToken</text>
+}
+else
+{
+    <text>Authenticated. Access token: @accessToken</text>
+}
+

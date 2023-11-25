@@ -1,0 +1,41 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Bank.Application.Host.Pages.Register
+
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = null;
+}
+
+<h1>Регистрация</h1>
+
+<form method="post" asp-page-handler="Register">
+    <label for="login">Логин:</label>
+    <input type="text" id="userName" name="userName" required/>
+    <br/>
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required/>
+    <br/>
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" name="firstName" required/>
+    <br/>
+
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" name="lastName"/>
+    <br/>
+
+    <label for="middleName">Отчество:</label>
+    <input type="text" id="middleName" name="patronymic" required/>
+    <br/>
+
+    <label for="salary">Зарплата:</label>
+    <input type="number" id="salary" name="salary" required/>
+    <br/>
+    <label for="birthDate">Дата рождения:</label>
+    <input type="date" id="birthDate" name="birthDate" required/>
+    
+    <button type="submit">Зарегистрироваться</button>
+</form>
+

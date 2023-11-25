@@ -1,0 +1,16 @@
+﻿@page
+@model Bank.Application.Host.Pages.LogOut
+
+@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Logout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <button asp-page-handler="LogOut" type="submit">Logout</button>
+</form>

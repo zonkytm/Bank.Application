@@ -1,0 +1,50 @@
+﻿@page
+@model Bank.Application.Host.Pages.Account
+
+@{
+    ViewBag.Title = "Личный кабинет";
+    Layout = "_Layout";
+}
+
+<h1>Личный кабинет</h1>
+
+<section>
+    <h2>Данные пользователя</h2>
+
+    <!-- Здесь будут отображаться данные пользователя -->
+    <p>Имя: 1</p>
+    <p>Email: 1</p>
+    <!-- Добавьте другие поля по необходимости -->
+
+    <!-- Форма для обновления данных пользователя -->
+    <form method="post" action="/Account/UpdateProfile">
+        <label for="userName">Имя:</label>
+        <input type="text" id="userName" name="userName" value="1" required />
+        <br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="1" required />
+        <br />
+
+        <!-- Добавьте другие поля по необходимости -->
+
+        <button type="submit">Обновить данные</button>
+    </form>
+</section>
+
+<section>
+    <h2>Список карт</h2>
+    <!-- Ваш код со списком кредитов пользователя -->
+</section>
+
+<section>
+    <h2>Список кредитов</h2>
+    <!-- Ваш код со списком кредитов пользователя -->
+</section>
+
+<section>
+    <h2>Список депозитов</h2>
+    <!-- Ваш код со списком кредитов пользователя -->
+</section>
+
+<!-- Добавьте разделы для истории кредитов, истории депозитов и списка карт -->

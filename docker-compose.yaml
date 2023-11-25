@@ -1,0 +1,52 @@
+﻿version: "3.8"
+
+services:
+  bank-application-service:
+    build:
+      context: Bank.Application.Host
+      dockerfile: Bank.Application.Host/Dockerfile
+    depends_on:
+      bank-application-service-db:
+        condition: service_healthy 
+      bank-application-migrations:
+        condition: service_completed_successfully
+    ports:
+      - "2023:80"
+    volumes:
+      - ./bank-application-service/appsettings.json:/app/appsettings.json:rw
+    networks:
+      - md-bank
+
+  bank-application-service-db:
+    image: postgres:latest
+    container_name: bank-application-service-db
+    ports:
+      - 6432:5432
+    environment:
+      POSTGRES_DB: "bank_application"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "111111"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+    networks:
+      - md-bank
+
+  bank-application-migrations:
+    build:
+      context: Bank.Application.Migrations
+      dockerfile: Dockerfile
+    depends_on:
+      bank-application-service-db:
+        condition: service_healthy
+    volumes:
+      - ./bank-application-service/appsettings.json:/app/appsettings.json:rw
+    networks:
+     - md-bank
+
+
+networks:
+  md-bank:
+    driver: bridge
