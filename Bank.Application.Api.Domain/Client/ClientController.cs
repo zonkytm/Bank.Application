@@ -78,7 +78,7 @@ public class ClientController : Controller
             var secretKey = _jwtSettings.Value.SecretKey;
             var keyBytes = Encoding.UTF8.GetBytes(secretKey);
             var base64Key = Convert.ToBase64String(keyBytes);
-            var jwtToken = _tokenService.GenerateJwtToken(userId, userName, base64Key);
+            var jwtToken = _tokenService.GenerateJwtToken(userId, userName, secretKey);
             return new LoginResponse
             {
                 ClientToken = jwtToken

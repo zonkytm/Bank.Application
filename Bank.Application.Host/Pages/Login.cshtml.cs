@@ -1,6 +1,7 @@
 ﻿using Bank.Application.Api.Clients.Requests;
 using Bank.Application.Api.Clients.Responses;
 using Bank.Application.AppServices.ApiClient;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -38,8 +39,6 @@ public class Login : PageModel
         {
             
             _httpContextAccessor.HttpContext.Session.SetString("AccessToken", loginResponse.ClientToken);
-            
-
             return RedirectToPage("/Account"); // Перенаправление на другую страницу
         }
         else

@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Bank.Application.AppServices.Abstractions.Tokens;
 using Microsoft.IdentityModel.Tokens;
 
@@ -10,17 +11,16 @@ public class TokenService : ITokenService
     public string GenerateJwtToken(string userId, string login, string secretKey)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Convert.FromBase64String(secretKey);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, login),
                 new Claim(ClaimTypes.Name, login),
             }),
             Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
