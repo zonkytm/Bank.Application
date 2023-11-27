@@ -4,7 +4,6 @@ using Bank.Application.Api.Clients.Responses;
 using Bank.Application.AppServices.Abstractions.Client;
 using Bank.Application.AppServices.Abstractions.Client.Infos;
 using Bank.Application.AppServices.Abstractions.Tokens;
-using Bank.Application.AppServices.Clients;
 using Bank.Application.Host;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

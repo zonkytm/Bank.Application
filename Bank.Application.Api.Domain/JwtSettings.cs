@@ -1,4 +1,4 @@
-﻿namespace Bank.Application.Host;
+﻿namespace Bank.Application.Api.Domain;
 
 public class JwtSettings
 {

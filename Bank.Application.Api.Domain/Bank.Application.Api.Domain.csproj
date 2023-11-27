@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BCrypt.Net" Version="0.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Bank.Application.Api\Bank.Application.Api.csproj" />
+      <ProjectReference Include="..\Bank.Application.AppServices\Bank.Application.AppServices.csproj" />
+      <ProjectReference Include="..\Bank.Application.DataAccess\Bank.Application.DataAccess.csproj" />
+    </ItemGroup>
+
+</Project>

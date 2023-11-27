@@ -1,13 +1,14 @@
 using System.Text;
 using Bank.Application.AppServices.ApiClient;
 using Bank.Application.Host;
+using Bank.Application.Host.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 var configuration = new ConfigurationBuilder()
@@ -30,7 +31,12 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddAuthentication("Bearer")  // схема аутентификации - с помощью jwt-токенов
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })  // схема аутентификации - с помощью jwt-токенов
+    
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -43,9 +49,18 @@ builder.Services.AddAuthentication("Bearer")  // схема аутентифик
             ValidAudience = audience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
-    });    
+    });
 
+builder.Services.AddAuthorization(options => 
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build());
 
+builder.Services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        options.Conventions.AuthorizePage("/Login"); // Замените на ваш путь
+    });
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -53,10 +68,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseSession();  
-app.UseAuthentication();
+
 app.UseStaticFiles();
+app.UseSession();
+app.UseMiddleware<TokenMiddleware>();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {

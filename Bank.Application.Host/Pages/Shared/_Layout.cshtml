@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="~/img/imgicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/Index" class="nav-link">Главная</a></li>
+                <li><a href="/About" class="nav-link">О нас</a></li>
+                <li><a href="/Account" class="nav-link">Личный кабинет</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <!-- Футер -->
+    </footer>
+</body>
+</html>

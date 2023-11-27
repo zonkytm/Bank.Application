@@ -1,4 +1,5 @@
 using System.Text;
+using Bank.Application.Api.Domain;
 using Bank.Application.Api.Domain.Client;
 using Bank.Application.AppServices.Abstractions.Client;
 using Bank.Application.AppServices.Abstractions.Tokens;
@@ -8,15 +9,12 @@ using Bank.Application.AppServices.Tokens;
 using Bank.Application.DataAccess;
 using Bank.Application.DataAccess.Clients.Repository;
 using Bank.Application.Host;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.JSInterop;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 var configuration = new ConfigurationBuilder()
@@ -67,7 +65,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseRouting();
-app.UseStaticFiles();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {

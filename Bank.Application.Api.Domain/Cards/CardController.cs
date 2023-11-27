@@ -1,4 +1,4 @@
-﻿namespace Bank.Application.Host.Cards;
+﻿namespace Bank.Application.Api.Domain.Cards;
 
 public class CardController
 {

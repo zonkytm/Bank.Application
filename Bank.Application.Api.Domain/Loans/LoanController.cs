@@ -1,4 +1,4 @@
-﻿namespace Bank.Application.Host.Loans;
+﻿namespace Bank.Application.Api.Domain.Loans;
 
 public class LoanController
 {

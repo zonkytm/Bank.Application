@@ -4,15 +4,19 @@
 @{
     ViewBag.Title = "Личный кабинет";
     Layout = "_Layout";
-    
+
 }
 
+<html lang="Ru">
+<head>
 
+</head>
+<body>
 <h1>Личный кабинет</h1>
 
 <section>
     <h2>Данные пользователя</h2>
-
+    <img src="~/img/img.jpg"  alt="">
     <!-- Здесь будут отображаться данные пользователя -->
     <p>Имя: 1</p>
     <p>Email: 1</p>
@@ -21,12 +25,12 @@
     <!-- Форма для обновления данных пользователя -->
     <form method="post" action="/Account/UpdateProfile">
         <label for="userName">Имя:</label>
-        <input type="text" id="userName" name="userName" value="1" required />
-        <br />
+        <input type="text" id="userName" name="userName" value="1" required/>
+        <br/>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="1" required />
-        <br />
+        <input type="email" id="email" name="email" value="1" required/>
+        <br/>
 
         <!-- Добавьте другие поля по необходимости -->
 
@@ -48,5 +52,9 @@
     <h2>Список депозитов</h2>
     <!-- Ваш код со списком кредитов пользователя -->
 </section>
+
+</body>
+</html>
+
 
 <!-- Добавьте разделы для истории кредитов, истории депозитов и списка карт -->

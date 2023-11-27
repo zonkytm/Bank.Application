@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Bank.Application.Host.Pages;
 
+[Authorize]
 public class Account : PageModel
 {
     private readonly ApiClient _apiClient;
@@ -16,16 +17,9 @@ public class Account : PageModel
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<IActionResult> OnGet()
+    public void OnGet()
     {
-        var accessToken = HttpContext.Session.GetString("AccessToken");
-
-        // Проверьте, что токен не пустой
-        if (string.IsNullOrEmpty(accessToken))
-        {
-            // Редирект на страницу аутентификации или другое действие в случае отсутствия токена
-            return RedirectToPage("/Login");
-        }
-        return Page();
     }
+    
+    
 }

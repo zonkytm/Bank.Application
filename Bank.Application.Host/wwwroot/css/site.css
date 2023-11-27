@@ -1,0 +1,30 @@
+header {
+  background-color: #9dc5e1; /* Пастельный синий */
+  padding: 10px 0;
+}
+
+nav a {
+  color: #333; /* Темно-серый текст */
+  transition: background-color 0.3s;
+}
+
+/* Темнение при наведении на элементы */
+nav a:hover {
+  background-color: #7ba9d0; /* Светло-синий при наведении */
+}
+
+/* Стили для выделенной страницы */
+nav a.active {
+  background-color: #7ba9d0; /* Светло-синий для выделенной страницы */
+}
+
+nav ul {
+    text-align: center;
+  }
+
+  nav li {
+    display: block;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
