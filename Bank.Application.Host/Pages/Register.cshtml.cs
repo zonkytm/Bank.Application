@@ -1,12 +1,13 @@
-﻿using Bank.Application.Api.Clients.Requests;
-
+﻿using Bank.Application.Api.Contracts.Clients.Requests;
 using Bank.Application.AppServices.ApiClient;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
 namespace Bank.Application.Host.Pages;
 
+[AllowAnonymous]
 public class Register : PageModel
 {
 

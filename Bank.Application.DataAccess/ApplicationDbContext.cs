@@ -16,7 +16,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<ClientEntity> Clients { get; set; }
     // public DbSet<LoanEntity> Loans { get; set; }
-    // public DbSet<DepositEntity> Deposits { get; set; }
+    public DbSet<DepositEntity> Deposits { get; set; }
     // public DbSet<Card> Cards { get; set; }
     // public DbSet<BankAccount> BankAccounts { get; set; }
 

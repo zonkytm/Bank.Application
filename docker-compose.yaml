@@ -1,15 +1,12 @@
 ﻿version: "3.8"
 
 services:
-  bank-application-service:
+  bank-application-client-service:
     build:
-      context: Bank.Application.Host
       dockerfile: Bank.Application.Host/Dockerfile
     depends_on:
-      bank-application-service-db:
-        condition: service_healthy 
-      bank-application-migrations:
-        condition: service_completed_successfully
+      bank-application-server-service:
+        condition: service_started
     ports:
       - "2023:80"
     volumes:
@@ -17,13 +14,28 @@ services:
     networks:
       - md-bank
 
+  bank-application-server-service:
+    build:
+      dockerfile: Bank.Application.Api.Domain/Dockerfile
+    depends_on:
+      bank-application-service-db:
+        condition: service_healthy
+      bank-application-migrations:
+        condition: service_completed_successfully
+    ports:
+      - "2103:80"
+    volumes:
+      - ./bank-application-service/appsettings.json:/app/appsettings.json:rw
+    networks:
+      - md-bank
+  
   bank-application-service-db:
     image: postgres:latest
     container_name: bank-application-service-db
     ports:
       - 6432:5432
     environment:
-      POSTGRES_DB: "bank_application"
+      POSTGRES_DB: "bank"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "111111"
     healthcheck:
@@ -36,13 +48,13 @@ services:
 
   bank-application-migrations:
     build:
-      context: Bank.Application.Migrations
-      dockerfile: Dockerfile
+      dockerfile: Bank.Application.Migrations/Dockerfile
     depends_on:
       bank-application-service-db:
         condition: service_healthy
     volumes:
       - ./bank-application-service/appsettings.json:/app/appsettings.json:rw
+      - ./bank-application-service-migrations/Scripts:/app/Scripts/:ro
     networks:
      - md-bank
 

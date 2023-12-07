@@ -6,7 +6,7 @@ WORKDIR /src
 COPY ["Bank.Application.Migrations/Bank.Application.Migrations.csproj", "Bank.Application.Migrations/"]
 RUN dotnet restore "Bank.Application.Migrations/Bank.Application.Migrations.csproj"
 COPY . .
-WORKDIR "/src/Bank.Application.Migrations"
+WORKDIR "Bank.Application.Migrations"
 RUN dotnet build "Bank.Application.Migrations.csproj" -c Release -o /app/build
 
 FROM build AS publish

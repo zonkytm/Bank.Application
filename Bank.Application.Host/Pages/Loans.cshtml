@@ -1,0 +1,28 @@
+﻿@page
+@model Bank.Application.Host.Pages.Loans
+
+@if (Model.LoansList.Any())
+{
+    <h2>Текущие кредиты:</h2>
+    <ul>
+        @foreach (var loan in Model.LoansList)
+        {
+            <li>Сумма: @loan.LoanAmount - Срок: @loan. месяцев</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Нет текущих кредитов.</p>
+}
+
+<div>
+    <button id="applyCredit">Оформить новый кредит</button>
+    <a asp-page="./CreditHistory">История кредитов</a>
+</div>
+
+<script>
+    document.getElementById("applyCredit").addEventListener("click", () => {
+        // Ваш JavaScript код для обработки оформления нового кредита
+    });
+</script>

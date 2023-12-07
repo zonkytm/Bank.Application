@@ -19,9 +19,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Scripts\20231118162317_CreateSchema.sql" />
-      <Content Include="Scripts\20231118162317_CreateSchema.sql">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Scripts\20231121123900_AddComments.sql" />
     </ItemGroup>
 

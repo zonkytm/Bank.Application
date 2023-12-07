@@ -1,3 +1,68 @@
 ﻿@page
+@using Bank.Application.Api.Contracts.Deposits
 @model Bank.Application.Host.Pages.Deposits
+
+@{
+    ViewBag.Title = "Депозиты";
+    Layout = "Shared/_Layout";
+}
+
+<h1>Оформление депозита.</h1>
+
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form method="post" asp-page-handler="Deposits">
+    <div>
+        <label for="amount">Сумма:</label>
+        <input type="text" id="amount" name="amount" required/>
+    </div>
+
+    <div>
+        <label for="period">Срок:</label>
+        <input type="text" id="period" name="period"/>
+    </div>
+
+    <div>
+        <button type="submit">Оформить</button>
+    </div>
+</form>
+
+@if (@Model.DepositsList != null && @Model.DepositsList.Length > 0)
+{
+    <h2>Список депозитов клиента:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Депозит ID</th>
+                <th>Сумма</th>
+                <th>Срок</th>
+                <th>Ставка</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var deposit in @Model.DepositsList)
+            {
+                <tr>
+                    <td>@deposit.DepositId</td>
+                    <td>@deposit.DepositAmount</td>
+                    <td>@deposit.Period</td>
+                    <td>@deposit.InterestRate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 

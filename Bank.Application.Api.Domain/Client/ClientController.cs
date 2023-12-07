@@ -1,10 +1,10 @@
 ﻿using System.Text;
-using Bank.Application.Api.Clients.Requests;
-using Bank.Application.Api.Clients.Responses;
-using Bank.Application.AppServices.Abstractions.Client;
-using Bank.Application.AppServices.Abstractions.Client.Infos;
-using Bank.Application.AppServices.Abstractions.Tokens;
-using Bank.Application.Host;
+using Bank.Application.Api.Contracts.Clients.Requests;
+using Bank.Application.Api.Contracts.Clients.Responses;
+using Bank.Application.AppServices.Clients;
+using Bank.Application.AppServices.Contracts.Client.Handlers;
+using Bank.Application.AppServices.Contracts.Client.Infos;
+using Bank.Application.AppServices.Contracts.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,14 +18,16 @@ public class ClientController : Controller
     private readonly IGetClientByLoginHandler _clientByLoginHandler;
     private readonly IOptions<JwtSettings> _jwtSettings;
     private readonly ITokenService _tokenService;
+    private readonly IUpdateClientHandler _updateClientHandler;
 
     public ClientController(ICreateClientHandler createClientHandler, ITokenService tokenService,
-        IOptions<JwtSettings> jwtSettings, IGetClientByLoginHandler clientByLoginHandler)
+        IOptions<JwtSettings> jwtSettings, IGetClientByLoginHandler clientByLoginHandler, IUpdateClientHandler updateClientHandler)
     {
         _createClientHandler = createClientHandler;
         _tokenService = tokenService;
         _jwtSettings = jwtSettings;
         _clientByLoginHandler = clientByLoginHandler;
+        _updateClientHandler = updateClientHandler;
     }
 
     [HttpPost("register")]
@@ -72,7 +74,7 @@ public class ClientController : Controller
 
         if (isPasswordValid)
         {
-            var userId = client.id.ToString();
+            var userId = client.Id.ToString();
             var userName = loginRequest.Login;
             var secretKey = _jwtSettings.Value.SecretKey;
             var keyBytes = Encoding.UTF8.GetBytes(secretKey);
@@ -80,16 +82,12 @@ public class ClientController : Controller
             var jwtToken = _tokenService.GenerateJwtToken(userId, userName, secretKey);
             return new LoginResponse
             {
-                ClientToken = jwtToken
+                ClientToken = jwtToken,
+                Login = client.Login,
+                Id = client.Id
             };
         }
-        else
-        {
-            return new LoginResponse
-            {
-                ClientToken = null
-            };
-        }
+        throw new Exception("Пароль не верный");
     }
 
     private string HashPassword(string password)
@@ -98,10 +96,32 @@ public class ClientController : Controller
         return hashedPassword;
     }
 
-    [HttpGet("getOne")]
-    [Authorize]
-    public long GetOne()
+    [HttpGet("getClient")]
+    public async Task<GetClientByLoginResponse> GetClientByLogin([FromQuery] string login)
     {
-        return 1;
+        var client = await _clientByLoginHandler.Handle(login);
+        var response = new GetClientByLoginResponse
+        {
+            Login = client.Login,
+            FirstName = client.FirstName,
+            LastName = client.LastName,
+            MiddleName = client.MiddleName,
+            Salary = client.Salary
+        };
+        
+        return response;
+    }
+
+    [HttpPut("updateClient")]
+    public async Task<UpdateClientResponse> UpdateClient([FromBody] UpdateClientRequest request)
+    {
+        if (request == null)
+        {
+            throw new NullReferenceException("Запрос на обновление не может быть пустым");
+        }
+
+        var response = await _updateClientHandler.Handle(request);
+
+        return response;
     }
 }

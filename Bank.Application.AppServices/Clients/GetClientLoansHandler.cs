@@ -1,4 +1,5 @@
-﻿using Bank.Application.DataAccess.Loans.Repository;
+﻿using Bank.Application.AppServices.Contracts.Loans.Repositories;
+using Bank.Application.DataAccess.Loans.Repository;
 
 namespace Bank.Application.AppServices.Clients;
 
@@ -10,4 +11,6 @@ public class GetClientLoansHandler
     {
         _loanRepository = loanRepository;
     }
+    
+    
 }

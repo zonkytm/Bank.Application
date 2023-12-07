@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Bank.Application.AppServices.Abstractions.Tokens;
+using Bank.Application.AppServices.Contracts.Tokens;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Bank.Application.AppServices.Tokens;

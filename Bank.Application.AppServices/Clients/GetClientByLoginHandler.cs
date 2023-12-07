@@ -1,6 +1,5 @@
-﻿using Bank.Application.Api.Clients;
-using Bank.Application.AppServices.Abstractions.Client;
-using Bank.Application.DataAccess.Clients.Repository;
+﻿using Bank.Application.Api.Contracts.Clients;
+using Bank.Application.AppServices.Contracts.Client.Repositories;
 
 namespace Bank.Application.AppServices.Clients;
 

@@ -14,47 +14,47 @@
 <body>
 <h1>Личный кабинет</h1>
 
+
+@if (!string.IsNullOrEmpty(TempData["ErrorUpdateMessage"] as string))
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 <section>
     <h2>Данные пользователя</h2>
-    <img src="~/img/img.jpg"  alt="">
-    <!-- Здесь будут отображаться данные пользователя -->
-    <p>Имя: 1</p>
-    <p>Email: 1</p>
-    <!-- Добавьте другие поля по необходимости -->
-
-    <!-- Форма для обновления данных пользователя -->
-    <form method="post" action="/Account/UpdateProfile">
-        <label for="userName">Имя:</label>
-        <input type="text" id="userName" name="userName" value="1" required/>
-        <br/>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="1" required/>
-        <br/>
-
-        <!-- Добавьте другие поля по необходимости -->
-
-        <button type="submit">Обновить данные</button>
+    <p>Логин: @Model.ClientInformation.Login</p>
+    <p>Имя: @Model.ClientInformation.FirstName</p>
+    <p>Фамилия: @Model.ClientInformation.LastName</p>
+    <p>Отчество: @Model.ClientInformation.MiddleName</p>
+    <p>Зарплата: @Model.ClientInformation.Salary</p>
+    <form method="post" asp-page-handler="UpdateClient">
+        <div>
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login"/>
+        </div>
+        <div>
+            <label for="firstName">Имя:</label>
+            <input type="text" id="firstName" name="firstName"/>
+        </div>
+        <div>
+            <label for="lastName">Фамилия:</label>
+            <input type="text" id="lastName" name="lastName"/>
+        </div>
+        <div>
+            <label for="middleName">Отчество:</label>
+            <input type="text" id="middleName" name="middleName"/>
+        </div>
+        <div>
+            <label for="salary">Зарплата:</label>
+            <input type="number" id="salary" name="salary"/>
+        </div>
+        <div>
+            <button type="submit">Обновить</button>
+        </div>
     </form>
-</section>
-
-<section>
-    <h2>Список карт</h2>
-    <!-- Ваш код со списком кредитов пользователя -->
-</section>
-
-<section>
-    <h2>Список кредитов</h2>
-    <!-- Ваш код со списком кредитов пользователя -->
-</section>
-
-<section>
-    <h2>Список депозитов</h2>
-    <!-- Ваш код со списком кредитов пользователя -->
 </section>
 
 </body>
 </html>
-
-
-<!-- Добавьте разделы для истории кредитов, истории депозитов и списка карт -->

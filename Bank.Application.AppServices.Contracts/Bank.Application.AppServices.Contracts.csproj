@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Cards" />
+      <Folder Include="LoanApplications\Handlers" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Bank.Application.Api.Contracts\Bank.Application.Api.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

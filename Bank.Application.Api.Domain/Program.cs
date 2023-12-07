@@ -1,14 +1,18 @@
 using System.Text;
 using Bank.Application.Api.Domain;
 using Bank.Application.Api.Domain.Client;
-using Bank.Application.AppServices.Abstractions.Client;
-using Bank.Application.AppServices.Abstractions.Tokens;
+using Bank.Application.Api.Domain.CustomMiddlewares;
+using Bank.Application.Api.Domain.Deposits;
+using Bank.Application.AppServices;
 using Bank.Application.AppServices.ApiClient;
 using Bank.Application.AppServices.Clients;
+using Bank.Application.AppServices.Contracts.ApiClient;
+using Bank.Application.AppServices.Contracts.Client.Handlers;
+using Bank.Application.AppServices.Contracts.Client.Repositories;
+using Bank.Application.AppServices.Contracts.Tokens;
 using Bank.Application.AppServices.Tokens;
 using Bank.Application.DataAccess;
 using Bank.Application.DataAccess.Clients.Repository;
-using Bank.Application.Host;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,10 +27,10 @@ var configuration = new ConfigurationBuilder()
 builder.Services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 builder.Services.Configure<ApiClientSettings>(configuration.GetSection("ApiClientSettings"));
 builder.Services.AddScoped <ClientController>();
-builder.Services.AddScoped<IClientRepository,ClientRepository>();
-builder.Services.AddScoped<ICreateClientHandler,CreateClientHandler>();
+builder.Services.AddScoped<DepositController>();
+builder.Services.AddRepositories();
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IGetClientByLoginHandler, GetClientByLoginHandler>();
+builder.Services.AddHandlers();
 builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<ApiClient>();
@@ -50,11 +54,7 @@ builder.Services.AddAuthentication("Bearer")  // схема аутентифик
         };
     });    
 builder.Services.AddAuthorization();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(
-       connectionString));
+builder.Services.AddContext(configuration);
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -65,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseRouting();
+app.UseMiddleware<ApiExceptionMiddleware>();
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {

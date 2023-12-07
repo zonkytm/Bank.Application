@@ -1,5 +1,6 @@
 using System.Text;
 using Bank.Application.AppServices.ApiClient;
+using Bank.Application.AppServices.Contracts.ApiClient;
 using Bank.Application.Host;
 using Bank.Application.Host.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -56,11 +57,8 @@ builder.Services.AddAuthorization(options =>
         .RequireAuthenticatedUser()
         .Build());
 
-builder.Services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions.AuthorizePage("/Login"); // Замените на ваш путь
-    });
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Bank.Application.Api\Bank.Application.Api.csproj" />
+      <ProjectReference Include="..\Bank.Application.Api.Contracts\Bank.Application.Api.Contracts.csproj" />
       <ProjectReference Include="..\Bank.Application.AppServices\Bank.Application.AppServices.csproj" />
       <ProjectReference Include="..\Bank.Application.DataAccess\Bank.Application.DataAccess.csproj" />
     </ItemGroup>

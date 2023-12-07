@@ -1,9 +1,7 @@
-﻿using Bank.Application.Api.Client.Requests;
-using Bank.Application.Api.Clients.Requests;
-using Bank.Application.AppServices.Abstractions.Client;
-using Bank.Application.AppServices.Abstractions.Client.Infos;
-using Bank.Application.DataAccess.Clients;
-using Bank.Application.DataAccess.Clients.Repository;
+﻿using Bank.Application.Api.Contracts.Clients;
+using Bank.Application.AppServices.Contracts.Client.Handlers;
+using Bank.Application.AppServices.Contracts.Client.Infos;
+using Bank.Application.AppServices.Contracts.Client.Repositories;
 
 namespace Bank.Application.AppServices.Clients;
 
@@ -23,7 +21,8 @@ public class CreateClientHandler : ICreateClientHandler
             throw new NullReferenceException();
         }
 
-        var client = new ClientEntity
+        //todo валидация реквеста по параметрам (клиенту больше 18 лет, зарплата больше 0)
+        var client = new Client
         {
             Login = createClientRequest.Login,
             Password = createClientRequest.HashedPassword,

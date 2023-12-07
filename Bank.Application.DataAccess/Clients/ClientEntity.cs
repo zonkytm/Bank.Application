@@ -8,7 +8,8 @@ public class ClientEntity
 
 {
     [Key]
-    public int id { get; set; }
+    [Column("id")]
+    public int Id { get; set; }
     
     [Required]
     [Column("login")]

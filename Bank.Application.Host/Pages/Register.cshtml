@@ -11,31 +11,42 @@
 <h1>Регистрация</h1>
 
 <form method="post" asp-page-handler="Register">
-    <label for="login">Логин:</label>
-    <input type="text" id="userName" name="userName" required/>
-    <br/>
+    <div>
+        <label for="login">Логин:</label>
+        <input type="text" id="userName" name="userName" required/>
+    </div>
 
-    <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required/>
-    <br/>
-    <label for="firstName">Имя:</label>
-    <input type="text" id="firstName" name="firstName" required/>
-    <br/>
+    <div>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required/>
+    </div>
 
-    <label for="lastName">Фамилия:</label>
-    <input type="text" id="lastName" name="lastName"/>
-    <br/>
+    <div>
+        <label for="firstName">Имя:</label>
+        <input type="text" id="firstName" name="firstName" required/>
+    </div>
 
-    <label for="middleName">Отчество:</label>
-    <input type="text" id="middleName" name="middleName" required/>
-    <br/>
+    <div>
+        <label for="lastName">Фамилия:</label>
+        <input type="text" id="lastName" name="lastName"/>
+    </div>
 
-    <label for="salary">Зарплата:</label>
-    <input type="number" id="salary" name="salary" required/>
-    <br/>
-    <label for="birthDate">Дата рождения:</label>
-    <input type="date" id="birthDate" name="birthDate" required/>
-    
-    <button type="submit">Зарегистрироваться</button>
+    <div>
+        <label for="middleName">Отчество:</label>
+        <input type="text" id="middleName" name="middleName" required/>
+    </div>
+
+    <div>
+        <label for="salary">Зарплата:</label>
+        <input type="number" id="salary" name="salary" required/>
+    </div>
+
+    <div>
+        <label for="birthDate">Дата рождения:</label>
+        <input type="date" id="birthDate" name="birthDate" required/>
+    </div>
+
+    <div>
+        <button type="submit">Зарегистрироваться</button>
+    </div>
 </form>
-

@@ -1,4 +1,6 @@
-﻿namespace Bank.Application.DataAccess.Loans.Repository;
+﻿using Bank.Application.AppServices.Contracts.Loans.Repositories;
+
+namespace Bank.Application.DataAccess.Loans.Repository;
 
 public class LoanRepository : ILoanRepository
 {

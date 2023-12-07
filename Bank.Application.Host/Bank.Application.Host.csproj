@@ -21,13 +21,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Bank.Application.Api\Bank.Application.Api.csproj" />
+        <ProjectReference Include="..\Bank.Application.Api.Contracts\Bank.Application.Api.Contracts.csproj" />
         <ProjectReference Include="..\Bank.Application.AppServices\Bank.Application.AppServices.csproj" />
         <ProjectReference Include="..\Bank.Application.DataAccess\Bank.Application.DataAccess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Pages\LoansModel.cshtml.cs">
+      <Compile Update="Pages\Loans.cshtml.cs">
         <DependentUpon>LoansModel.cshtml</DependentUpon>
       </Compile>
     </ItemGroup>
@@ -78,10 +78,6 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Authorization" />
     </ItemGroup>
 
 </Project>

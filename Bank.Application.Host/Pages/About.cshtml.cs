@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Bank.Application.Host.Pages;
 
-[Authorize]
+[AllowAnonymous]
 public class About : PageModel
 {
     private readonly IHttpContextAccessor _httpContextAccessor;

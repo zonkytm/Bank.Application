@@ -14,11 +14,11 @@ public class TokenMiddleware
         // Получите токен доступа из сессии
         string accessToken = context.Session.GetString("AccessToken");
 
-        // Если токен доступа существует, установите заголовок Authorization
-
-        context.Request.Headers.TryAdd("Authorization", "Bearer " + accessToken);
-        context.Response.Headers.Add("X-SERVICE-NAME", accessToken);
-
+        if (accessToken != null)
+        {
+            context.Request.Headers.TryAdd("Authorization", "Bearer " + accessToken);
+            context.Response.Headers.Add("X-SERVICE-NAME", accessToken);
+        }
         // Передайте управление следующему компоненту в конвейере
         await _next(context);
     }
